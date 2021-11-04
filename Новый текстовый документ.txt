@@ -1,0 +1,34 @@
+sqlite> .open students.db
+sqlite> CREATE TABLE courses (
+   ...> id INTEGER PRIMARY KEY AUTOINCREMENT,
+   ...> name TEXT NOT NULL UNIQUE,
+   ...> lesosns_amount INTEGER
+   ...> );
+sqlite>
+sqlite> .tables
+courses
+sqlite> CREATE TABLE streams (
+   ...> id INTEGER PRIMARY KEY AUTOINCREMENT,
+   ...> number INTEGER NOT NULL UNIQUE,
+   ...> course_id INTEGER NOT NULL,
+   ...> start_date TEXT NOT NULL,
+   ...> FOREIGN KEY (course_id) REFERENCES courses (id)
+   ...> );
+sqlite>
+sqlite> .tables
+courses  streams
+sqlite> CREATE TABLE students (
+   ...> id INTEGER PRIMARY KEY AUTOINCREMENT,
+   ...> surname TEXT NOT NULL,
+   ...> name TEXT NOT NULL
+   ...> );
+sqlite> .tables
+courses   streams   students
+sqlite> CREATE TABLE grades (
+   ...> student_id INTEGER NOT NULL,
+   ...> stream_id INTEGER NOT NULL,
+   ...> grade REAL NOT NULL,
+   ...> PRIMARY KEY(student_id, stream_id),
+   ...> FOREIGN KEY (student_id) REFERENCES students(id),
+   ...> FOREIGN KEY (stream_id) REFERENCES streams(id)
+   ...> );
