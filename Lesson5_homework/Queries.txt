@@ -1,0 +1,12 @@
+1.
+SELECT number AS 'stream_number',
+       (SELECT name
+        FROM courses
+        WHERE courses.id = streams.course_id
+       )
+              AS course_name,
+       students_amount
+FROM streams
+WHERE students_amount > 35;
+
+2.
